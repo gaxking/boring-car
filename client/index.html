@@ -1,0 +1,60 @@
+<!doctype html>
+
+<!--
+    WebSocket chat client
+
+    WebSocket and WebRTC based multi-user chat sample with two-way video
+    calling, including use of TURN if applicable or necessary.
+
+    This file provides the structure of the chat client's web page, including
+    logging in, text chatting, and making private video calls to other users.
+
+    To read about how this sample works:  http://bit.ly/webrtc-from-chat
+
+    Any copyright is dedicated to the Public Domain.
+    http:   creativecommons.org/publicdomain/zero/1.0/
+-->
+
+<html>
+<head>
+  <title>WebSocket Chat Demo with WebRTC Calling</title>
+  <meta charset="utf-8">
+  <link href="chat.css" rel="stylesheet">
+  <link href="shared.css" rel="stylesheet">
+  <script type="text/javascript" src="chatclient.js"></script>
+  <script src="adapter.js"></script>
+  <style>
+.infobox, .userlistbox, .chatbox{display:none}
+.userlistbox li{color:#fff;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="infobox">
+      <p>Enter a username: <input id="name" type="text" maxlength="12" required autocomplete="username" inputmode="verbatim" placeholder="Username" value="">
+        <input type="button" name="login" value="Log in" onclick="connect()"></p>
+    </div>
+    <ul class="userlistbox"></ul>
+    <div class="chatbox"></div>
+    <div class="camerabox">
+      <video id="received_video" autoplay></video>
+      <video id="local_video" autoplay muted></video>
+      <div id="control">
+        <div class="forward">forward</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
+        <div class="back">back</div>
+
+
+        <div class="RoundLessLeft">RoundLessLeft</div>
+        <div class="RoundLessRight">RoundLessRight</div>
+        <div class="RoundBigLeft">RoundBigLeft</div>
+        <div class="RoundBigRight">RoundBigRight</div>
+      </div>
+        <input type="range" id="mg" name="mg" 
+         min="0" max="90" value="0" step="10">
+    </div>
+    <div class="empty-container"></div>
+  </div>
+</body>
+</html>
