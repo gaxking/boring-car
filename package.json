@@ -1,0 +1,22 @@
+{
+  "name": "boring-car",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaxking/boring-car.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaxking/boring-car/issues"
+  },
+  "homepage": "https://github.com/gaxking/boring-car#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
