@@ -689,7 +689,7 @@ function control(){
   })
 
   document.onkeydown=function(e){
-    const e=window.event||e;
+    let e=window.event||e;
     switch(e.keyCode){
       case 37: //左
         direction = 'left';
