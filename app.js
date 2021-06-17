@@ -6,25 +6,10 @@ const fs= require('fs');
 const credentials = require('./ssl');
 const https = require('https')
 
-const webappPath = '/home/pi/work/boring-car';
-
-app.get('/reload', function (req, res) {
-  let cmdStr = `pm2 restart app`
-
-  exec(cmdStr, (err, stdout, stderr) => {
-    res.end(`stdout: ${stdout}\nstderr: ${stderr}`);
-  });
-});
 
 //更新git
 app.get('/update', function (req, res) {
-  let cmdStr = '';
-  let path = `${webappPath}`;
-
-  cmdStr = `cd ${path} && git pull`;
-  exec(cmdStr, (err, stdout, stderr) => {
-    res.end(`stdout: ${stdout}\nstderr: ${stderr}`);
-  });
+  console.log("xxxx");
 });
 
 
