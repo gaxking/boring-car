@@ -679,7 +679,7 @@ function control(){
   parentDom.addEventListener('click', (e)=>{
     if(e.target.parentNode === e.currentTarget){
       var direction = e.target.innerText;
-      fetch(`https://car.luoyongjie.cn:3000/wheel?hz=1600&order=${direction}`)
+      //fetch(`https://car.luoyongjie.cn:3000/wheel?hz=1600&order=${direction}`)
       carSocket.send(JSON.stringify({
         target:'wheel',
         hz:16088,
