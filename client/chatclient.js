@@ -687,6 +687,32 @@ function control(){
       }));
     }
   })
+
+  document.onkeydown=function(e){
+    const e=window.event||e;
+    switch(e.keyCode){
+      case 37: //左
+        direction = 'left';
+        break; 
+      case 38: //上
+        direction = 'up';
+        break;
+      case 39:  //右
+        direction = 'left';
+        break;	
+      case 40:  //下
+        direction = 'down';
+        break;		 			
+    }
+
+    if(direction){
+      carSocket.send(JSON.stringify({
+        target:'wheel',
+        hz:16088,
+        order:direction
+      }));
+    }
+  }
 }
 
 function mgControl(){
