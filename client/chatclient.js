@@ -697,6 +697,12 @@ function mgControl(){
 window.onload = function(){
   if(location.search.indexOf("master")>-1){
     document.getElementById("name").value = 'master';
+
+    const exampleSocket = new WebSocket("ws://car.luoyongjie.cn:5000");
+    exampleSocket.onopen = function (event) {
+      exampleSocket.send("Here's some text that the server is urgently awaiting!");
+    };
+
   }else{
     document.getElementById("name").value = 'car'
   }
@@ -712,3 +718,5 @@ window.onload = function(){
 
   connect();
 }
+
+
