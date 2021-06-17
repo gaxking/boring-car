@@ -680,6 +680,11 @@ function control(){
     if(e.target.parentNode === e.currentTarget){
       var direction = e.target.innerText;
       fetch(`https://car.luoyongjie.cn:3000/wheel?hz=1600&order=${direction}`)
+      carSocket.send(JSON.stringify({
+        target:'wheel',
+        hz:16088,
+        order:direction
+      }));
     }
   })
 }
@@ -697,12 +702,7 @@ function mgControl(){
 window.onload = function(){
   if(location.search.indexOf("master")>-1){
     document.getElementById("name").value = 'master';
-
-    const exampleSocket = new WebSocket("wss://car.luoyongjie.cn:5000");
-    exampleSocket.onopen = function (event) {
-      exampleSocket.send("Here's some text that the server is urgently awaiting!");
-    };
-
+    window.carSocket = new WebSocket("wss://car.luoyongjie.cn:5000");
   }else{
     document.getElementById("name").value = 'car'
   }
