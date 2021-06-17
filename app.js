@@ -7,12 +7,6 @@ const credentials = require('./ssl');
 const https = require('https')
 
 
-//更新git
-app.get('/update', function (req, res) {
-  console.log("xxxx");
-});
-
-
 app.use('/client', express.static(path.join(__dirname, './client')))
 
 const httpsServer = https.createServer(credentials, app)
