@@ -696,7 +696,7 @@ function control(){
         direction = 'left';
         break; 
       case 38: //上
-        direction = 'up';
+        direction = 'forward';
         break;
       case 39:  //右
         direction = 'left';
