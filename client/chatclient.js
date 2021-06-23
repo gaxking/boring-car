@@ -699,7 +699,7 @@ function control(){
         direction = 'forward';
         break;
       case 39:  //右
-        direction = 'left';
+        direction = 'right';
         break;	
       case 40:  //下
         direction = 'back';
