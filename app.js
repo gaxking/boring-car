@@ -26,23 +26,21 @@ wss.on('connection', function connection(ws) {
   ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
 
+    const stop = async ()=>{
+      carProcess.kill();
+      carProcess=null;
+      t=null;
+      await spanPromise({py:"stop"})
+    }
+
     if(!carProcess){
       const definedQuery = {hz:6400, order:"forward"};
       const {hz, order, sec} = {...definedQuery, ...data};
       carProcess = await spanPromise({py:"soft", hz, order});
-      t = setTimeout(async ()=>{
-        carProcess.kill();
-        carProcess=null;
-        t=null;
-        await spanPromise({py:"stop"})
-      }, 1000)
+      t = setTimeout(stop, 1000)
     }else if(t!==null){
-      t = setTimeout(async ()=>{
-        carProcess.kill();
-        carProcess=null;
-        t=null;
-        await spanPromise({py:"stop"})
-      }, 1000)
+      clearTimeout(t);
+      t = setTimeout(stop, 1000)
     }
 
     console.log('received: %s', data);
