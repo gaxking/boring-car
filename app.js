@@ -23,7 +23,7 @@ function spanPromise({py, hz, order}) {
 let carProcess = null;
 let t = null;
 wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(data) {
+  ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
 
     if(!carProcess){
