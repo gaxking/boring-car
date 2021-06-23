@@ -702,7 +702,7 @@ function control(){
         direction = 'left';
         break;	
       case 40:  //下
-        direction = 'down';
+        direction = 'back';
         break;		 			
     }
 
