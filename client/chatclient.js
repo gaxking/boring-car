@@ -42,7 +42,9 @@ var mediaConstraints = {
   video: {
     aspectRatio: {
       ideal: 1.333333     // 3:2 aspect is preferred
-    }
+    },
+    width: { min: 640, max: 640 },
+    height: { min: 320, max: 320 }
   }
 };
 
