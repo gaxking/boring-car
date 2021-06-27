@@ -20,6 +20,12 @@ function spanPromise({py, hz, order}) {
   })
 }
 
+function mgPromise({deg}) {
+  return new Promise((resolve,reject)=>{
+    const pythonProcess = child_process.spawn('python', [`/home/pi/work/mg-moter/main.py`, deg]);
+    resolve(pythonProcess)
+  })
+}
 let carProcess = null;
 let t = null;
 wss.on('connection', function connection(ws) {
@@ -48,6 +54,23 @@ wss.on('connection', function connection(ws) {
 
   ws.send('something');
 });
+
+app.get('/mg', async (req, res) => {
+   const {deg} = {...req.query};
+
+   if(mgProcess){
+      mgProcess.kill();
+      mgProcess = null;
+   }
+
+   if(deg==='0'){
+      res.send('')
+      return;
+   }
+
+   mgProcess = await mgPromise({deg});
+   res.send('')
+})
 
 const SSLPORT = 5000
 server.listen(SSLPORT, function () {
