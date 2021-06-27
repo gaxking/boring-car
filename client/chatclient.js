@@ -688,6 +688,7 @@ function control(){
     }
   })
 
+  let t = null;
   document.onkeydown=function(e){
     e = window.event||e;
     let direction;
@@ -706,14 +707,22 @@ function control(){
         break;		 			
     }
 
-    if(direction){
-      carSocket.send(JSON.stringify({
-        target:'wheel',
-        hz:16088,
-        order:direction
-      }));
+    if(direction && !t){
+      t = setInterval(()=>{
+        carSocket.send(JSON.stringify({
+          target:'wheel',
+          hz:16088,
+          order:direction
+        }));
+      }, 100)
     }
   }
+
+  document.onkeyup=function(e){
+    clearTimeout(t);
+    t = null;
+  }
+
 }
 
 function mgControl(){
