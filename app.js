@@ -55,6 +55,7 @@ wss.on('connection', function connection(ws) {
   ws.send('something');
 });
 
+let mgProcess = null;
 app.get('/mg', async (req, res) => {
    const {deg} = {...req.query};
 
