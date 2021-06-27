@@ -733,7 +733,7 @@ function mgControl(){
 
   rangeDom.addEventListener('change', (e)=>{
     console.log(e.target.value)
-    fetch(`https://car.luoyongjie.cn:3000/mg?deg=${e.target.value}`)
+    fetch(`https://car.luoyongjie.cn:5000/mg?deg=${e.target.value}`)
   })
 }
 
