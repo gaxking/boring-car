@@ -64,11 +64,6 @@ app.get('/mg', async (req, res) => {
       mgProcess = null;
    }
 
-   if(deg==='0'){
-      res.send('')
-      return;
-   }
-
    mgProcess = await mgPromise({deg});
    res.send('')
 })
