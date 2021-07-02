@@ -43,8 +43,8 @@ var mediaConstraints = {
     aspectRatio: {
       ideal: 1.333333     // 3:2 aspect is preferred
     },
-    width: { min: 100, max: 100 },
-    height: { min: 60, max: 60 }
+    //width: { min: 100, max: 100 },
+    //height: { min: 60, max: 60 }
   }
 };
 
