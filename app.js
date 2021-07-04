@@ -31,17 +31,16 @@ function ultrasoundPromise(dir){
   return new Promise((resolve,reject)=>{
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-${dir}.py`]);
 
-
    pythonProcess.stdout.on('data', function (data) {
-      console.log(data.toString().trim());
+      resolve(data.toString().trim());
    });
-
-
   })
 }
 
+console.time("marker-elements");
 ultrasoundPromise('left').then(v=>{
   console.log(v);
+  console.timeEnd("marker-elements");
 })
 
 let carProcess = null;
@@ -70,11 +69,11 @@ wss.on('connection', function connection(ws) {
     console.log('received: %s', data);
   });
 
-  const ultrasound =  ()=>{
+  const ultrasound =  async ()=>{
     ws.send(JSON.stringify({
       action:'ultrasound',
-      left:111,
-      right:222
+      left:await ultrasoundPromise('left'),
+      right:await ultrasoundPromise('right')
     }));
     setTimeout(ultrasound, 150);
   }
