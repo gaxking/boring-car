@@ -56,15 +56,16 @@ let t = null;
 wss.on('connection', function connection(ws) {
   let mCARDIR = null;
   let mDISTANCE = {left:null, right:null}
+
+  const stop = async ()=>{
+    carProcess.kill();
+    carProcess=null;
+    t=null;
+    await spanPromise({py:"stop"})
+  }
+
   ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
-
-    const stop = async ()=>{
-      carProcess.kill();
-      carProcess=null;
-      t=null;
-      await spanPromise({py:"stop"})
-    }
 
     if(!carProcess){
       const definedQuery = {hz:6400, order:"forward"};
@@ -76,7 +77,7 @@ wss.on('connection', function connection(ws) {
       clearTimeout(t);
       t = setTimeout(stop, 200)
     }else if((mDISTANCE.left < 8 || mDISTANCE.right < 8) && mCARDIR === 'forward'){
-      stop();
+      await stop();
     }
 
     console.log('received: %s', data);
@@ -102,7 +103,7 @@ wss.on('connection', function connection(ws) {
     }));
 
     if(distance < 8 && mCARDIR === 'forward'){
-      stop();
+      await stop();
     }
 
     ultrasound  && setTimeout(()=>{ultrasound(dir)}, 0);
