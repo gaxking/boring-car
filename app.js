@@ -47,6 +47,11 @@ function ultrasoundPromise(dir){
       console.log('子进程已退出，退出码 '+code, dir, res);
    });
 
+    setTimeout(()=>{
+      pythonProcess.kill();
+      resolve(-1);
+    }, 100)
+
   })
 }
 
