@@ -37,7 +37,9 @@ function ultrasoundPromise(dir){
   })
 }
 
-console.log(ultrasoundPromise('left'));
+ultrasoundPromise('left').then(v=>{
+  console.log(v);
+})
 
 let carProcess = null;
 let t = null;
