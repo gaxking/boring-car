@@ -17,6 +17,7 @@ function spanPromise({py, hz, order}) {
   return new Promise((resolve,reject)=>{
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/stepper-motor/stepper-${py}.py`, hz, order]);
     resolve(pythonProcess)
+    console.log(5, order);
 
     if(order==='stop'){
       setTimeout(()=>{
