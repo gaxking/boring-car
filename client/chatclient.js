@@ -698,6 +698,7 @@ function control(){
       ultrasoundLeftDom.innerText = `${parseInt(data.left, 10)}cm`;
       ultrasoundRightDom.innerText = `${parseInt(data.right, 10)}cm`;
     }
+    console.log(data);
   }
 
   let t = null;
