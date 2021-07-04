@@ -79,6 +79,7 @@ wss.on('connection', function connection(ws) {
       const definedQuery = {hz:6400, order:"forward"};
       const {hz, order, sec} = {...definedQuery, ...data};
       mCARDIR = order;
+      console.log(2, order);
       carProcess = await spanPromise({py:"soft", hz, order});
       t = setTimeout(stop, 200)
     }else if(t!==null){
