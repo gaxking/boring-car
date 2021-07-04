@@ -26,6 +26,17 @@ function mgPromise({deg}) {
     resolve(pythonProcess)
   })
 }
+
+function ultrasoundPromise(){
+  return new Promise((resolve,reject)=>{
+    const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-left.py`]);
+    console.log("pythonProcess", pythonProcess);
+    resolve(pythonProcess)
+  })
+}
+
+ultrasoundPromise();
+
 let carProcess = null;
 let t = null;
 wss.on('connection', function connection(ws) {
