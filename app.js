@@ -36,17 +36,21 @@ function mgPromise({deg}) {
   })
 }
 
-function ultrasoundPromise(dir){
+function ultrasoundPromise(){
   return new Promise((resolve,reject)=>{
-    const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-${dir}.py`]);
+    const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index.py`]);
 
    let res;
-   pythonProcess.stdout.on('data', function (data) {
-      res = parseInt(data.toString().trim(), 10);
+    pythonProcess.stdout.on('data', function (data) {
+      const [left, right] = data.split(/[^\d\.]+/);
+      res = {
+        left:parseInt(left, 10),
+        right:parseInt(right, 10)
+      }
    });
 
    pythonProcess.stderr.on('data', function (data) {
-      resolve(-1);
+      resolve({left:-1, right:-1});
    });
 
    pythonProcess.on('close', function (code) {
@@ -55,7 +59,7 @@ function ultrasoundPromise(dir){
 
     setTimeout(()=>{
       pythonProcess.kill();
-      resolve(-1);
+      resolve({left:-1, right:-1});
     }, 150)
   })
 }
@@ -107,21 +111,21 @@ wss.on('connection', function connection(ws) {
   });
 
 
-  let ultrasound =  async (dir)=>{
-    const distance = await ultrasoundPromise(dir);
-    mDISTANCE[dir] = distance;
+  let ultrasound =  async ()=>{
+    const distance = await ultrasoundPromise();
+    mDISTANCE = distance;
     ws.send(JSON.stringify({
       action:'ultrasound',
-      dir,
-      distance
+      ...distance
     }));
 
-    if(distance < 8 && distance !== -1 && mCARDIR === 'forward'){
-      //await stop();
+    if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
+      console.log(4);
+      // await stop();
     }
 
     setTimeout(()=>{
-      ultrasound  && ultrasound(dir);
+      ultrasound  && ultrasound();
     }, 10)
   }
 
