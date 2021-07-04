@@ -87,7 +87,7 @@ wss.on('connection', function connection(ws) {
       mCARDIR = null;
       t = setTimeout(stop, 200)
     }else if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
-      await stop();
+      // await stop();
     }
 
     console.log('received: %s', data);
@@ -112,7 +112,7 @@ wss.on('connection', function connection(ws) {
     }));
 
     if(distance < 8 && distance !== -1 && mCARDIR === 'forward'){
-      await stop();
+      //await stop();
     }
 
     ultrasound  && ultrasound(dir);
