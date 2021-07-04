@@ -93,7 +93,6 @@ wss.on('connection', function connection(ws) {
 
 
   let ultrasound =  async (dir)=>{
-    console.log("dir", dir);
     const distance = await ultrasoundPromise(dir);
     mDISTANCE[dir] = distance;
     ws.send(JSON.stringify({
