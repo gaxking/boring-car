@@ -76,7 +76,7 @@ wss.on('connection', function connection(ws) {
     }else if(t!==null){
       clearTimeout(t);
       t = setTimeout(stop, 200)
-    }else if((mDISTANCE.left < 8 || mDISTANCE.right < 8) && mCARDIR === 'forward'){
+    }else if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
       await stop();
     }
 
@@ -102,7 +102,7 @@ wss.on('connection', function connection(ws) {
       distance
     }));
 
-    if(distance < 8 && mCARDIR === 'forward'){
+    if(distance < 8 && distance !== -1 && mCARDIR === 'forward'){
       await stop();
     }
 
