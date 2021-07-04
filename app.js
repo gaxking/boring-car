@@ -29,6 +29,7 @@ function mgPromise({deg}) {
 
 function ultrasoundPromise(dir){
   return new Promise((resolve,reject)=>{
+    console.log('start: ', dir);
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-${dir}.py`]);
 
    let res;
