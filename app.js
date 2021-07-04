@@ -96,7 +96,7 @@ wss.on('connection', function connection(ws) {
       distance: await ultrasoundPromise(dir)
     }));
 
-    ultrasound  && setTimeout(ultrasound, 0);
+    ultrasound  && setTimeout(()=>{ultrasound(dir)}, 0);
   }
 
   ultrasound('left');
