@@ -31,8 +31,9 @@ function ultrasoundPromise(dir){
   return new Promise((resolve,reject)=>{
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-${dir}.py`]);
 
+   let res;
    pythonProcess.stdout.on('data', function (data) {
-      resolve(data.toString().trim());
+      res = data.toString().trim();
       console.log('stdout: ' + data, dir);
    });
 
@@ -41,7 +42,8 @@ function ultrasoundPromise(dir){
    });
 
    pythonProcess.on('close', function (code) {
-      console.log('子进程已退出，退出码 '+code, dir);
+      resolve(res);
+      console.log('子进程已退出，退出码 '+code, dir, res);
    });
 
   })
