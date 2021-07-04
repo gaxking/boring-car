@@ -33,7 +33,7 @@ function ultrasoundPromise(dir){
 
 
    pythonProcess.stdout.on('data', function (data) {
-      console.log(data.toString());
+      console.log(data.toString().trim());
    });
 
 
