@@ -42,7 +42,7 @@ function ultrasoundPromise(){
 
    let res;
     pythonProcess.stdout.on('data', function (data) {
-      const [left, right] = data.split(/[^\d\.]+/);
+      const [left, right] = data.toString().split(/[^\d\.]+/);
       res = {
         left:parseInt(left, 10),
         right:parseInt(right, 10)
