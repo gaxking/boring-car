@@ -122,7 +122,9 @@ wss.on('connection', function connection(ws) {
       //await stop();
     }
 
-    ultrasound  && ultrasound(dir);
+    setTimeout(()=>{
+      ultrasound  && ultrasound(dir);
+    }, 10)
   }
 
   ultrasound('left');
