@@ -73,7 +73,7 @@ wss.on('connection', function connection(ws) {
 
   const stop = async ()=>{
     console.log(6);
-    carProcess.kill();
+    carProcess && carProcess.kill();
     carProcess=null;
     t=null;
     mCARDIR = null;
@@ -96,7 +96,7 @@ wss.on('connection', function connection(ws) {
       t = setTimeout(stop, 200)
     }else if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
       console.log(4);
-      // await stop();
+      await stop();
     }
 
     console.log('received: %s', data);
@@ -120,7 +120,7 @@ wss.on('connection', function connection(ws) {
     }));
 
     if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
-      console.log(4);
+      console.log(7);
       await stop();
     }
 
