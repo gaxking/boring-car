@@ -72,14 +72,13 @@ wss.on('connection', function connection(ws) {
 
   const stop = async ()=>{
     console.log(6);
+    carProcess && carProcess.kill();
+    carProcess=null;
+    t=null;
 
-    if(mCARDIR === null){
+    if(mCARDIR !== 'stop'){
       mCARDIR = 'stop';
       await spanPromise({py:"stop"})
-      carProcess && carProcess.kill();
-      carProcess=null;
-      t=null;
-
       mCARDIR = null;
     }
   }
