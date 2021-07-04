@@ -17,6 +17,13 @@ function spanPromise({py, hz, order}) {
   return new Promise((resolve,reject)=>{
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/stepper-motor/stepper-${py}.py`, hz, order]);
     resolve(pythonProcess)
+
+    if(order==='stop'){
+      setTimeout(()=>{
+        pythonProcess.kill();
+        resolve(-1);
+      }, 150)
+    }
   })
 }
 
@@ -55,7 +62,8 @@ let carProcess = null;
 let t = null;
 wss.on('connection', function connection(ws) {
   let mCARDIR = null;
-  let mDISTANCE = {left:null, right:null}
+  let mDISTANCE = {left:null, right:null};
+  let mCARSTATE = 'stop';
 
   const stop = async ()=>{
     carProcess.kill();
@@ -75,6 +83,7 @@ wss.on('connection', function connection(ws) {
       t = setTimeout(stop, 200)
     }else if(t!==null){
       clearTimeout(t);
+      mCARDIR = null;
       t = setTimeout(stop, 200)
     }else if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
       await stop();
@@ -93,6 +102,7 @@ wss.on('connection', function connection(ws) {
 
 
   let ultrasound =  async (dir)=>{
+    console.log(1, dir);
     const distance = await ultrasoundPromise(dir);
     mDISTANCE[dir] = distance;
     ws.send(JSON.stringify({
