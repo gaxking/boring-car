@@ -121,7 +121,7 @@ wss.on('connection', function connection(ws) {
 
     if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
       console.log(4);
-      // await stop();
+      await stop();
     }
 
     setTimeout(()=>{
