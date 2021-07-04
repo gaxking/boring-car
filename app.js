@@ -18,12 +18,6 @@ function spanPromise({py, hz, order}) {
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/stepper-motor/stepper-${py}.py`, hz, order]);
     resolve(pythonProcess)
 
-    if(order==='stop'){
-      setTimeout(()=>{
-        pythonProcess.kill();
-        resolve(-1);
-      }, 150)
-    }
   })
 }
 
@@ -83,10 +77,12 @@ wss.on('connection', function connection(ws) {
       carProcess = await spanPromise({py:"soft", hz, order});
       t = setTimeout(stop, 200)
     }else if(t!==null){
+      console.log(3);
       clearTimeout(t);
       mCARDIR = null;
       t = setTimeout(stop, 200)
     }else if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
+      console.log(4);
       // await stop();
     }
 
