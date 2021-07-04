@@ -60,7 +60,7 @@ function ultrasoundPromise(){
     setTimeout(()=>{
       pythonProcess.kill();
       resolve({left:-1, right:-1});
-    }, 150)
+    }, 250)
   })
 }
 
