@@ -690,6 +690,10 @@ function control(){
     }
   })
 
+  carSocket.onmessage = (data)=>{
+    console.log(data);
+  }
+
   let t = null;
   document.onkeydown=function(e){
     e = window.event||e;

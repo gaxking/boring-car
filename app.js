@@ -52,7 +52,18 @@ wss.on('connection', function connection(ws) {
     console.log('received: %s', data);
   });
 
-  ws.send('something');
+  const ultrasound =  ()=>{
+    ws.send(JSON.stringify({
+      action:'ultrasound',
+      left:111,
+      right:222
+    }));
+    setTimeout(ultrasound, 150);
+  }
+
+  ultrasound();
+
+  ws.send('connet finsh');
 });
 
 let mgProcess = null;
