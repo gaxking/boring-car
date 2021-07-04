@@ -75,6 +75,7 @@ wss.on('connection', function connection(ws) {
 
 
   let ultrasound =  async ()=>{
+    console.log("111", !!ultrasound);
     const [left, right] = await Promise.all([ultrasoundPromise('left'), ultrasoundPromise('right')]);
 
     ws.send(JSON.stringify({
@@ -82,6 +83,9 @@ wss.on('connection', function connection(ws) {
       left,
       right
     }));
+
+
+    console.log("222", !!ultrasound);
 
     ultrasound  && setTimeout(ultrasound, 10);
   }
