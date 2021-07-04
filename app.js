@@ -30,7 +30,15 @@ function mgPromise({deg}) {
 function ultrasoundPromise(){
   return new Promise((resolve,reject)=>{
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-left.py`]);
-    console.log("pythonProcess", pythonProcess);
+
+   pythonProcess.stdout.on('data', function (data) {
+      console.log('stdout: ' + data);
+   });
+ 
+   pythonProcess.stderr.on('data', function (data) {
+      console.log('stderr: ' + data);
+   });
+
     resolve(pythonProcess)
   })
 }
