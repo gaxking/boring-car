@@ -126,7 +126,7 @@ wss.on('connection', function connection(ws) {
   }
 
   ultrasound('left');
-  ultrasound('right');
+  //ultrasound('right');
 
   ws.send('connet finsh');
 });
