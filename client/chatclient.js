@@ -698,6 +698,7 @@ function control(){
       ultrasoundLeftDom.innerText = `${data.left}cm`;
       ultrasoundRightDom.innerText = `${data.right}cm`;
     }
+    console.log(data);
   }
 
   let t = null;
