@@ -123,8 +123,8 @@ wss.on('connection', function connection(ws) {
     ultrasound  && ultrasound(dir);
   }
 
-  ultrasound('left');
-  ultrasound('right');
+  //ultrasound('left');
+  //ultrasound('right');
 
   ws.send('connet finsh');
 });
