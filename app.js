@@ -38,8 +38,6 @@ function mgPromise({deg}) {
 
 function ultrasoundPromise(dir){
   return new Promise((resolve,reject)=>{
-    resolve(10);
-    return;
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-${dir}.py`]);
 
    let res;
@@ -121,10 +119,8 @@ wss.on('connection', function connection(ws) {
     if(distance < 8 && distance !== -1 && mCARDIR === 'forward'){
       //await stop();
     }
-    
-    setTimeout(()=>{
-      ultrasound  && ultrasound(dir);
-    }, 10)
+
+    ultrasound  && ultrasound(dir);
   }
 
   ultrasound('left');
