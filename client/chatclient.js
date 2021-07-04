@@ -693,11 +693,11 @@ function control(){
   const ultrasoundLeftDom = document.getElementById('ultrasound-left');
   const ultrasoundRightDom = document.getElementById('ultrasound-right');
   carSocket.onmessage = ({data})=>{
+    data = JSON.parse(data);
     if(data.action === 'ultrasound'){
       ultrasoundLeftDom.innerText = `${data.left}cm`;
       ultrasoundRightDom.innerText = `${data.right}cm`;
     }
-    console.log(data);
   }
 
   let t = null;
