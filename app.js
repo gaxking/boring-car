@@ -31,9 +31,16 @@ function ultrasoundPromise(dir){
   return new Promise((resolve,reject)=>{
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-${dir}.py`]);
 
+
    pythonProcess.stdout.on('data', function (data) {
-     resolve(data)
+      console.log('stdout: ' + data);
    });
+ 
+   pythonProcess.stderr.on('data', function (data) {
+      console.log('stderr: ' + data);
+   });
+
+
   })
 }
 
