@@ -86,7 +86,10 @@ wss.on('connection', function connection(ws) {
   ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
 
-    if(!carProcess){
+    if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
+      console.log(4);
+      await stop();
+    }else if(!carProcess){
       const definedQuery = {hz:6400, order:"forward"};
       const {hz, order, sec} = {...definedQuery, ...data};
       mCARDIR = order;
@@ -97,9 +100,6 @@ wss.on('connection', function connection(ws) {
       console.log(3);
       clearTimeout(t);
       t = setTimeout(stop, 200)
-    }else if(((mDISTANCE.left < 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right < 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
-      console.log(4);
-      await stop();
     }
 
     console.log('received: %s', data);
