@@ -68,6 +68,7 @@ wss.on('connection', function connection(ws) {
   let mCARSTATE = 'stop';
 
   const stop = async ()=>{
+    console.log(6);
     carProcess.kill();
     carProcess=null;
     t=null;
