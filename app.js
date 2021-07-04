@@ -29,12 +29,11 @@ function mgPromise({deg}) {
 
 function ultrasoundPromise(dir){
   return new Promise((resolve,reject)=>{
-    console.log('start: ', dir);
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index-${dir}.py`]);
 
    let res;
    pythonProcess.stdout.on('data', function (data) {
-      res = data.toString().trim();
+      res = parseInt(data.toString().trim(), 10);
    });
 
    pythonProcess.stderr.on('data', function (data) {
@@ -55,6 +54,8 @@ function ultrasoundPromise(dir){
 let carProcess = null;
 let t = null;
 wss.on('connection', function connection(ws) {
+  let mCARDIR = null;
+  let mDISTANCE = {left:null, right:null}
   ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
 
@@ -68,33 +69,40 @@ wss.on('connection', function connection(ws) {
     if(!carProcess){
       const definedQuery = {hz:6400, order:"forward"};
       const {hz, order, sec} = {...definedQuery, ...data};
+      mCARDIR = order;
       carProcess = await spanPromise({py:"soft", hz, order});
       t = setTimeout(stop, 200)
     }else if(t!==null){
       clearTimeout(t);
       t = setTimeout(stop, 200)
+    }else if((mDISTANCE.left < 8 || mDISTANCE.right < 8) && mCARDIR === 'forward'){
+      stop();
     }
 
     console.log('received: %s', data);
   });
 
   ws.on('close', ()=>{
-    console.log("close");
     ultrasound = null;
   });
 
   ws.on('error', ()=>{
-    console.log("error");
     ultrasound = null;
   });
 
 
   let ultrasound =  async (dir)=>{
+    const distance = await ultrasoundPromise(dir);
+    mDISTANCE[dir] = distance;
     ws.send(JSON.stringify({
       action:'ultrasound',
       dir,
-      distance: await ultrasoundPromise(dir)
+      distance
     }));
+
+    if(distance < 8 && mCARDIR === 'forward'){
+      stop();
+    }
 
     ultrasound  && setTimeout(()=>{ultrasound(dir)}, 0);
   }
