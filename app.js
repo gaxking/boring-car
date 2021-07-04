@@ -33,14 +33,15 @@ function ultrasoundPromise(dir){
 
    pythonProcess.stdout.on('data', function (data) {
       resolve(data.toString().trim());
+      console.log('stdout: ' + data, dir);
    });
 
-   pythonProcess.stdout.on('data', function (data) {
-      console.log('stdout: ' + data);
+   pythonProcess.stderr.on('data', function (data) {
+      console.log('stderr: ' + data, dir);
    });
 
    pythonProcess.on('close', function (code) {
-      console.log('子进程已退出，退出码 '+code);
+      console.log('子进程已退出，退出码 '+code, dir);
    });
 
   })
