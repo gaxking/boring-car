@@ -184,3 +184,19 @@ html,body{
   bottom:10px;
   right:20px;
 }
+
+#ultrasound-right{
+  position:absolute;
+  bottom:40px;
+  right:40px;
+  color:red;
+  font-size:30px;
+}
+
+#ultrasound-left{
+  position:absolute;
+  bottom:40px;
+  left:40px;
+  color:red;
+  font-size:30px;
+}

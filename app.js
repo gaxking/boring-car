@@ -37,12 +37,6 @@ function ultrasoundPromise(dir){
   })
 }
 
-console.time("marker-elements");
-ultrasoundPromise('left').then(v=>{
-  console.log(v);
-  console.timeEnd("marker-elements");
-})
-
 let carProcess = null;
 let t = null;
 wss.on('connection', function connection(ws) {

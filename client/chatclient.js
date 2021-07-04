@@ -690,8 +690,13 @@ function control(){
     }
   })
 
+  const ultrasoundLeftDom = document.getElementById('ultrasound-left');
+  const ultrasoundRightDom = document.getElementById('ultrasound-right');
   carSocket.onmessage = ({data})=>{
-    console.log(data);
+    if(data.action === 'ultrasound'){
+      ultrasoundLeftDom.innerText = `${data.left}cm`;
+      ultrasoundRightDom.innerText = `${data.right}cm`;
+    }
   }
 
   let t = null;
