@@ -88,6 +88,7 @@ wss.on('connection', function connection(ws) {
 
     console.log(4, mDISTANCE, data.order);
     if(((mDISTANCE.left <= 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right <= 8 && mDISTANCE.right !== -1)) && data.order === 'forward'){
+      console.log(999)
       await stop();
     }else if(!carProcess){
       const definedQuery = {hz:6400, order:"forward"};
