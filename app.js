@@ -64,11 +64,12 @@ wss.on('connection', function connection(ws) {
   });
 
   ws.on('close', ()=>{
-    console.log("xxx");
+    console.log("close");
     ultrasound = null;
   });
 
   ws.on('error', ()=>{
+    console.log("error");
     ultrasound = null;
   });
 
