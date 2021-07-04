@@ -35,23 +35,20 @@ function ultrasoundPromise(dir){
    let res;
    pythonProcess.stdout.on('data', function (data) {
       res = data.toString().trim();
-      console.log('stdout: ' + data, dir);
    });
 
    pythonProcess.stderr.on('data', function (data) {
-      console.log('stderr: ' + data, dir);
+      resolve(-1);
    });
 
    pythonProcess.on('close', function (code) {
       resolve(res);
-      console.log('子进程已退出，退出码 '+code, dir, res);
    });
 
     setTimeout(()=>{
       pythonProcess.kill();
       resolve(-1);
-    }, 100)
-
+    }, 150)
   })
 }
 
@@ -92,23 +89,18 @@ wss.on('connection', function connection(ws) {
   });
 
 
-  let ultrasound =  async ()=>{
-    console.log("111", !!ultrasound);
-    const [left, right] = await Promise.all([ultrasoundPromise('left'), ultrasoundPromise('right')]);
-
+  let ultrasound =  async (dir)=>{
     ws.send(JSON.stringify({
       action:'ultrasound',
-      left,
-      right
+      dir,
+      distance: await ultrasoundPromise(dir)
     }));
 
-
-    console.log("222", !!ultrasound);
-
-    ultrasound  && setTimeout(ultrasound, 10);
+    ultrasound  && setTimeout(ultrasound, 0);
   }
 
-  ultrasound();
+  ultrasound('left');
+  ultrasound('right');
 
   ws.send('connet finsh');
 });
