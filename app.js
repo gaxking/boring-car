@@ -112,9 +112,7 @@ wss.on('connection', function connection(ws) {
 
 
   let ultrasound =  async ()=>{
-    console.time("marker-elements");
     const distance = await ultrasoundPromise();
-    console.timeEnd("marker-elements");
     mDISTANCE = distance;
     ws.send(JSON.stringify({
       action:'ultrasound',
@@ -128,7 +126,7 @@ wss.on('connection', function connection(ws) {
 
     setTimeout(()=>{
       ultrasound  && ultrasound();
-    }, 10)
+    }, 30)
   }
 
   ultrasound('left');
