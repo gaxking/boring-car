@@ -695,10 +695,9 @@ function control(){
   carSocket.onmessage = ({data})=>{
     data = JSON.parse(data);
     if(data.action === 'ultrasound'){
-      ultrasoundLeftDom.innerText = `${data.left}cm`;
-      ultrasoundRightDom.innerText = `${data.right}cm`;
+      ultrasoundLeftDom.innerText = `${parseInt(data.left, 10)}cm`;
+      ultrasoundRightDom.innerText = `${parseInt(data.right, 10)}cm`;
     }
-    console.log(data);
   }
 
   let t = null;
