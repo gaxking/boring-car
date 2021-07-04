@@ -690,7 +690,7 @@ function control(){
     }
   })
 
-  carSocket.onmessage = (data)=>{
+  carSocket.onmessage = ({data})=>{
     console.log(data);
   }
 
