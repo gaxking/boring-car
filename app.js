@@ -119,12 +119,14 @@ wss.on('connection', function connection(ws) {
     if(distance < 8 && distance !== -1 && mCARDIR === 'forward'){
       //await stop();
     }
-
-    ultrasound  && ultrasound(dir);
+    
+    setTimeout(()=>{
+      ultrasound  && ultrasound(dir);
+    }, 10)
   }
 
-  //ultrasound('left');
-  //ultrasound('right');
+  ultrasound('left');
+  ultrasound('right');
 
   ws.send('connet finsh');
 });
