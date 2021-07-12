@@ -71,7 +71,7 @@ wss.on('connection', function connection(ws) {
   let mDISTANCE = {left:null, right:null};
 
   const stop = async ()=>{
-    //console.log(6);
+    console.log(6);
     carProcess && carProcess.kill();
     carProcess=null;
     t=null;
