@@ -133,8 +133,8 @@ wss.on('connection', function connection(ws) {
     }, 150)
   }
 
-  ultrasound('left');
-  ultrasound('right');
+  //ultrasound('left');
+  //ultrasound('right');
 
   ws.send('connet finsh');
 });
