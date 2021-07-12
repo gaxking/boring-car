@@ -43,7 +43,6 @@ function ultrasoundPromise(){
    let res;
     pythonProcess.stdout.on('data', function (data) {
       const [left, right] = data.toString().split(/[^\d\.]+/);
-      console.log("ggg", left, right);
       res = {
         left:parseInt(left, 10),
         right:parseInt(right, 10)
@@ -117,7 +116,7 @@ wss.on('connection', function connection(ws) {
 
 
   let ultrasound =  async ()=>{
-    const distance = await ultrasoundPromise();
+    const distance = {};//await ultrasoundPromise();
     mDISTANCE = distance;
     ws.send(JSON.stringify({
       action:'ultrasound',
