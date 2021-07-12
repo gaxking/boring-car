@@ -38,8 +38,6 @@ function mgPromise({deg}) {
 
 function ultrasoundPromise(){
   return new Promise((resolve,reject)=>{
-    resolve({left:10, right:10})
-    return;
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index.py`]);
 
    let res;
@@ -131,9 +129,8 @@ wss.on('connection', function connection(ws) {
     }
 
     setTimeout(()=>{
-      console.log(1);
       ultrasound  && ultrasound();
-    }, 1250)
+    }, 350)
   }
 
   ultrasound('left');
