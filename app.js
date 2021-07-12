@@ -71,7 +71,6 @@ wss.on('connection', function connection(ws) {
   let mDISTANCE = {left:null, right:null};
 
   const stop = async ()=>{
-    return;
     console.log(6);
     carProcess && carProcess.kill();
     carProcess=null;
@@ -134,8 +133,8 @@ wss.on('connection', function connection(ws) {
     }, 150)
   }
 
-  ultrasound('left');
-  ultrasound('right');
+  //ultrasound('left');
+  //ultrasound('right');
 
   ws.send('connet finsh');
 });
