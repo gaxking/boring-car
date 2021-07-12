@@ -17,7 +17,7 @@ function spanPromise({py, hz, order}) {
   return new Promise((resolve,reject)=>{
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/stepper-motor/stepper-${py}.py`, hz, order]);
     resolve(pythonProcess)
-    console.log(5, order);
+    //console.log(5, order);
 
     if(order==='stop'){
       setTimeout(()=>{
@@ -71,7 +71,7 @@ wss.on('connection', function connection(ws) {
   let mDISTANCE = {left:null, right:null};
 
   const stop = async ()=>{
-    console.log(6);
+    //console.log(6);
     carProcess && carProcess.kill();
     carProcess=null;
     t=null;
@@ -86,24 +86,24 @@ wss.on('connection', function connection(ws) {
   ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
 
-    console.log(4, mDISTANCE, data.order);
+    //console.log(4, mDISTANCE, data.order);
     if(((mDISTANCE.left <= 8 && mDISTANCE.left > -1)  || (mDISTANCE.right <= 8 && mDISTANCE.right < -1) || (mDISTANCE.left === -1 || mDISTANCE.right === -1)) && data.order === 'forward'){
-      console.log(999)
+      //console.log(999)
       await stop();
     }else if(!carProcess){
       const definedQuery = {hz:6400, order:"forward"};
       const {hz, order, sec} = {...definedQuery, ...data};
       mCARDIR = order;
-      console.log(2, order);
+      //console.log(2, order);
       carProcess = await spanPromise({py:"soft", hz, order});
       t = setTimeout(stop, 200)
     }else if(t!==null){
-      console.log(3);
+      //console.log(3);
       clearTimeout(t);
       t = setTimeout(stop, 200)
     }
 
-    console.log('received: %s', data);
+    //console.log('received: %s', data);
   });
 
   ws.on('close', ()=>{
@@ -124,7 +124,7 @@ wss.on('connection', function connection(ws) {
     }));
 
     if(((mDISTANCE.left <= 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right <= 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
-      console.log(7);
+      //console.log(7);
       await stop();
     }
 
