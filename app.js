@@ -88,17 +88,17 @@ wss.on('connection', function connection(ws) {
 
     //console.log(4, mDISTANCE, data.order);
     if(((mDISTANCE.left <= 8 && mDISTANCE.left > -1)  || (mDISTANCE.right <= 8 && mDISTANCE.right < -1) || (mDISTANCE.left === -1 || mDISTANCE.right === -1)) && data.order === 'forward'){
-      //console.log(999)
+      console.log(999)
       await stop();
     }else if(!carProcess){
       const definedQuery = {hz:6400, order:"forward"};
       const {hz, order, sec} = {...definedQuery, ...data};
       mCARDIR = order;
-      //console.log(2, order);
+      console.log(2, order);
       carProcess = await spanPromise({py:"soft", hz, order});
       t = setTimeout(stop, 200)
     }else if(t!==null){
-      //console.log(3);
+      console.log(3);
       clearTimeout(t);
       t = setTimeout(stop, 200)
     }
@@ -124,7 +124,7 @@ wss.on('connection', function connection(ws) {
     }));
 
     if(((mDISTANCE.left <= 8 && mDISTANCE.left !== -1)  || (mDISTANCE.right <= 8 && mDISTANCE.right !== -1)) && mCARDIR === 'forward'){
-      //console.log(7);
+      console.log(7);
       await stop();
     }
 
