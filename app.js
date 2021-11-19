@@ -86,6 +86,7 @@ wss.on('connection', function connection(ws) {
   ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
 
+    console.log(data);
     if(data.target === 'wheel'){
       if(((mDISTANCE.left <= 8 )  || (mDISTANCE.right <= 8 )) && data.order === 'forward'){
         await stop();
