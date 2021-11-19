@@ -86,23 +86,25 @@ wss.on('connection', function connection(ws) {
   ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
 
-    console.log(4, mDISTANCE, data.order);
-    if(((mDISTANCE.left <= 8 )  || (mDISTANCE.right <= 8 )) && data.order === 'forward'){
-      console.log(1)
-      await stop();
-    }else if(!carProcess){
-      console.log(2)
-      const definedQuery = {hz:6400, order:"forward"};
-      const {hz, order, sec} = {...definedQuery, ...data};
-      mCARDIR = order;
-      //console.log(2, order);
-      carProcess = await spanPromise({py:"soft", hz, order});
-      t = setTimeout(stop, 200)
-    }else if(t!==null){
-      console.log(3)
-      //console.log(3);
-      clearTimeout(t);
-      t = setTimeout(stop, 200)
+    if(data.target === 'wheel'){
+      if(((mDISTANCE.left <= 8 )  || (mDISTANCE.right <= 8 )) && data.order === 'forward'){
+        await stop();
+      }else if(!carProcess){
+        const definedQuery = {hz:6400, order:"forward"};
+        const {hz, order, sec} = {...definedQuery, ...data};
+        mCARDIR = order;
+        //console.log(2, order);
+        carProcess = await spanPromise({py:"soft", hz, order});
+        t = setTimeout(stop, 200)
+      }else if(t!==null){
+        //console.log(3);
+        clearTimeout(t);
+        t = setTimeout(stop, 200)
+      }
+    }else if(data.target === 'heat'){
+      ws.send(JSON.stringify({
+        action:'heat'
+      }));
     }
 
     //console.log('received: %s', data);

@@ -691,6 +691,8 @@ function control(){
     if(data.action === 'ultrasound'){
       ultrasoundLeftDom.innerText = `${data.left}cm`;
       ultrasoundRightDom.innerText = `${data.right}cm`;
+    }else if(data.action === 'heat'){
+      console.log("2222");
     }
     console.log(data);
   }
@@ -724,6 +726,10 @@ function control(){
       }, 100)
     }
   }
+
+  carSocket.send(JSON.stringify({
+    target:'heat',
+  }));
 
   document.onkeyup=function(e){
     clearTimeout(t);
