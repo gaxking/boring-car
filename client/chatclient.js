@@ -727,9 +727,12 @@ function control(){
     }
   }
 
-  carSocket.send(JSON.stringify({
-    target:'heat',
-  }));
+  
+  carSocket.onopen = ()=>{
+    carSocket.send(JSON.stringify({
+      target:'heat',
+    }));
+  }
 
   document.onkeyup=function(e){
     clearTimeout(t);
