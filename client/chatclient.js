@@ -39,13 +39,7 @@ var clientID = 0;
 
 var mediaConstraints = {
   audio: true,            // We want an audio track
-  video: {
-    aspectRatio: {
-      ideal: 1.333333     // 3:2 aspect is preferred
-    },
-    width: { min: 100, max: 100 },
-    height: { min: 60, max: 60 }
-  }
+  video: true
 };
 
 var myUsername = null;
