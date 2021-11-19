@@ -684,17 +684,28 @@ function control(){
     }
   })
 
+
+  let heatTimeFlag = Date.now();
+  const sendHeatFun = ()=>{
+    heatTimeFlag = Date.now();
+    carSocket.send(JSON.stringify({
+      target:'heat',
+    }));
+  }
+
   const ultrasoundLeftDom = document.getElementById('ultrasound-left');
   const ultrasoundRightDom = document.getElementById('ultrasound-right');
+  const pingRightDom = document.getElementById('ping-right');
+
   carSocket.onmessage = ({data})=>{
     data = JSON.parse(data);
     if(data.action === 'ultrasound'){
       ultrasoundLeftDom.innerText = `${data.left}cm`;
       ultrasoundRightDom.innerText = `${data.right}cm`;
     }else if(data.action === 'heat'){
-      console.log("2222");
+      pingRightDom.innerText = `ping:${Date.now() - heatTimeFlag}ms`;
+      sendHeatFun();
     }
-    console.log(data);
   }
 
   let t = null;
@@ -729,9 +740,7 @@ function control(){
 
   
   carSocket.onopen = ()=>{
-    carSocket.send(JSON.stringify({
-      target:'heat',
-    }));
+    sendHeatFun();
   }
 
   document.onkeyup=function(e){
