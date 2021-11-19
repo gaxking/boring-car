@@ -38,7 +38,7 @@ var clientID = 0;
 //
 
 var mediaConstraints = {
-  audio: true,            // We want an audio track
+  audio:false,            // We want an audio track
   video: true
 };
 
