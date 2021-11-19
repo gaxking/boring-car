@@ -86,7 +86,7 @@ wss.on('connection', function connection(ws) {
   ws.on('message', async function incoming(data) {
     data = JSON.parse(data);
 
-    //console.log(4, mDISTANCE, data.order);
+    console.log(4, mDISTANCE, data.order);
     if(((mDISTANCE.left <= 8 && mDISTANCE.left > -1)  || (mDISTANCE.right <= 8 && mDISTANCE.right < -1) || (mDISTANCE.left === -1 || mDISTANCE.right === -1)) && data.order === 'forward'){
       //console.log(999)
       await stop();
