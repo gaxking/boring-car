@@ -102,7 +102,6 @@ wss.on('connection', function connection(ws) {
         t = setTimeout(stop, 200)
       }
     }else if(data.target === 'heat'){
-    console.log(333);
       ws.send(JSON.stringify({
         action:'heat'
       }));
