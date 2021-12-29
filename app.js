@@ -36,6 +36,13 @@ function mgPromise({deg}) {
   })
 }
 
+function l28nPromise({state}) { //1：抬头 2:低头 3:停
+  return new Promise((resolve,reject)=>{
+    const pythonProcess = child_process.spawn('python', [`/home/pi/work/l28n/index.py`, state]);
+    resolve(pythonProcess)
+  })
+}
+
 function ultrasoundPromise(){
   return new Promise((resolve,reject)=>{
     const pythonProcess = child_process.spawn('python', [`/home/pi/work/ultrasound/index.py`]);
