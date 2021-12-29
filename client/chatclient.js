@@ -755,8 +755,8 @@ function mgControl(){
   rangeDom.style.display="block";
 
   rangeDom.addEventListener('click', (e)=>{
-    console.log(e.target.dataset['state'])
-    fetch(`https://car.luoyongjie.cn:5000/mg?state=${e.target.value}`)
+    const state = e.target.dataset['state'];
+    fetch(`https://car.luoyongjie.cn:5000/mg?state=${state}`)
   })
 }
 
