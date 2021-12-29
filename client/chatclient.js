@@ -754,9 +754,9 @@ function mgControl(){
   var rangeDom = document.getElementById("mg");
   rangeDom.style.display="block";
 
-  rangeDom.addEventListener('change', (e)=>{
-    console.log(e.target.value)
-    fetch(`https://car.luoyongjie.cn:5000/mg?deg=${e.target.value}`)
+  rangeDom.addEventListener('click', (e)=>{
+    console.log(e.target.dataset['state'])
+    fetch(`https://car.luoyongjie.cn:5000/mg?state=${e.target.value}`)
   })
 }
 

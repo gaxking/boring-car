@@ -152,19 +152,14 @@ wss.on('connection', function connection(ws) {
 
 let mgProcess = null;
 app.get('/mg', async (req, res) => {
-   const {deg} = {...req.query};
+   const {state} = {...req.query};
 
    if(mgProcess){
       mgProcess.kill();
       mgProcess = null;
    }
 
-   if(deg==='0'){
-      res.send('')
-      return;
-   }
-
-   mgProcess = await mgPromise({deg});
+   mgProcess = await l28nPromise({state});
    res.send('')
 })
 
