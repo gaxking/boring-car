@@ -770,12 +770,10 @@ window.onload = function(){
 
   if(location.search.indexOf("master")>-1){
     control();
-  }
-
-  if(location.search.indexOf("master")>-1){
     mgControl();
+  }else{
+    document.getElementById("mg").style.display = 'none';
   }
-
 
   connect();
 }
