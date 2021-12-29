@@ -159,6 +159,7 @@ app.get('/mg', async (req, res) => {
       mgProcess = null;
    }
 
+   console.loh("state", state);
    mgProcess = await l28nPromise({state});
    res.send('')
 })
